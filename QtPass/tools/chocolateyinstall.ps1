@@ -3,7 +3,7 @@
 
 $packageName = 'qtpass'
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url = 'https://github.com/IJHack/qtpass/releases/download/v1.0.1/qtpass-1.0.1.exe'
+$url = 'https://github.com/IJHack/qtpass/releases/download/v1.0.6/qtpass-1.0.6.exe'
 
 $packageArgs = @{
   packageName   = $packageName
@@ -13,11 +13,11 @@ $packageArgs = @{
   url64bit      = $url64
 
 
-  silentArgs    ='/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+  silentArgs    ='/VERYSILENT'
   validExitCodes= @(0)
 
 
-  registryUninstallerKey = 'qtpass'
+  registryUninstallerKey = 'QtPass'
   checksum      = ''
   checksumType  = 'md5'
   checksum64    = ''

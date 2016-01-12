@@ -10,7 +10,7 @@ $local_key6432   = "HKCU:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\
 $machine_key   = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 $machine_key6432 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"
 
-$file = @($local_key, $local_key6432, $machine_key, $machine_key6432) `
+$file = @($local_key, $local_key6432, $machine_key, $machine_key6432)`
     | ?{ Test-Path $_ } `
     | Get-ItemProperty `
     | Select-Object -ExpandProperty UninstallString
@@ -20,13 +20,14 @@ if ($file -eq $null -or $file -eq '') {
     $shouldUninstall = $false
 }
 
-$installerType = 'MSI' 
-$silentArgs = "$msiProductCodeGuid /qn /norestart"
+$installerType = 'EXE' 
+
+$silentArgs = '/S'
+
 $validExitCodes = @(0, 3010, 1605, 1614, 1641)
 
-$file = ''
+$file = 'C:\Program Files (x86)\QtPass\unins000.exe'
 
 if ($shouldUninstall) {
  Uninstall-ChocolateyPackage -PackageName $packageName -FileType $installerType -SilentArgs $silentArgs -validExitCodes $validExitCodes -File $file
 }
-
